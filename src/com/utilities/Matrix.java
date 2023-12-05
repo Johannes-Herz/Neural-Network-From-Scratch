@@ -17,9 +17,9 @@ import java.util.Random;
  */
 public class Matrix {
 
-    private double[][] data = null;
-    private int rowCount = 0;
-    private int columnCount = 0;
+    public double[][] data = null;
+    public int rowCount = 0;
+    public int columnCount = 0;
 
     /**
      *
@@ -70,13 +70,25 @@ public class Matrix {
 
     /**
      *
+     * @return
+     */
+    public double sum(){
+        double sum = 0;
+        for(int row = 0; row < this.rowCount; row++){
+            for(int column = 0; column < this.columnCount; column++){
+                sum += this.data[row][column];
+            }
+        }
+        return sum;
+    }
+    /**
+     *
      * @param m1
      * @param m2
      * @return
      * @throws IllegalArgumentException If the dimensions of the given matrices m1 and m2 do not match
      */
     public static Matrix dotProduct(Matrix m1, Matrix m2) throws IllegalArgumentException {
-
         if(m1.columnCount != m2.rowCount){
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
@@ -136,6 +148,44 @@ public class Matrix {
         return forEach;
     }
 
+    /**
+     *
+     * @param m1
+     * @param m2
+     * @return
+     */
+    public static Matrix subtract(Matrix m1, Matrix m2){
+        if(m1.rowCount != m2.rowCount || m1.columnCount != m2.columnCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be subtracted with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+        }
+
+        Matrix subtraction = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                subtraction.data[row][column] = m1.data[row][column] - m2.data[row][column];
+            }
+        }
+        return subtraction;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param m2
+     * @return
+     */
+    public static Matrix pow(Matrix m1, double exponent){
+        Matrix power = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                power.data[row][column] = Math.pow(m1.data[row][column], exponent);
+            }
+        }
+        return power;
+    }
     public abstract static class EntrySupplier{
         public abstract double supply(int row, int column);
     }
