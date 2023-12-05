@@ -3,7 +3,10 @@ package com.neuralnetwork;
 import com.neuralnetwork.layer.ILayer;
 import com.neuralnetwork.loss.ILoss;
 import com.neuralnetwork.optimization.IOptimizer;
+import com.utilities.DataLoader;
 import com.utilities.Matrix;
+
+import java.util.Vector;
 
 /**
  *
@@ -40,18 +43,56 @@ public class NeuralNetwork {
         }
     }
 
-    public static void train(NeuralNetwork neuralNetwork, Matrix X, Matrix Y, ILoss loss, IOptimizer optimizer, int epochs, int printInterval){
+    public static void train(NeuralNetwork neuralNetwork, Matrix X_Train, Matrix Y_Train, Matrix X_Test, Matrix Y_Test, ILoss loss, IOptimizer optimizer, int epochs, int printInterval){
 
         for(int epoch = 0; epoch < epochs; epoch++){
 
-            Matrix YHat = neuralNetwork.call(X);
-            double lossValue = loss.calculateLoss(Y, YHat);
-            neuralNetwork.calculateGradients(loss.calculateGradient(Y, YHat));
+            Matrix YHat_Train = neuralNetwork.call(X_Train);
+            double trainLossValue = loss.calculateLoss(Y_Train, YHat_Train);
+            neuralNetwork.calculateGradients(loss.calculateGradient(Y_Train, YHat_Train));
             optimizer.step();
 
+            if(epoch % printInterval == 0){
+                System.out.println("Epoch: " + epoch + " - train loss: " + trainLossValue);
+            }
+
+            if(X_Test != null && Y_Test != null){
+                Matrix YHat_Test = neuralNetwork.call(X_Test);
+                double testLossValue = loss.calculateLoss(Y_Test, YHat_Test);
+                if(epoch % printInterval == 0){
+                    System.out.println("Epoch: " + epoch + " - test loss: " + testLossValue);
+                }
+            }
+
+
+        }
+    }
+
+    public static void train(NeuralNetwork neuralNetwork, DataLoader dataLoader, Matrix X_Test, Matrix Y_Test, ILoss loss, IOptimizer optimizer, int epochs, int printInterval){
+
+        for(int epoch = 0; epoch < epochs; epoch++){
+
+            for(int batchIndex = 0; batchIndex < dataLoader.getBatchCount(); batchIndex++){
+                Vector<Matrix> batch = dataLoader.getNextBatch();
+                Matrix YHat = neuralNetwork.call(batch.get(0));
+                // double lossValue = loss.calculateLoss(batch.get(1), YHat);
+                neuralNetwork.calculateGradients(loss.calculateGradient(batch.get(1), YHat));
+                optimizer.step();
+            }
+
+            Matrix YHat_Train = neuralNetwork.call(dataLoader.dataset.get(0));
+            double trainLossValue = loss.calculateLoss(dataLoader.dataset.get(1), YHat_Train);
 
             if(epoch % printInterval == 0){
-                System.out.println("Epoch: " + epoch + " - current loss: " + lossValue);
+                System.out.println("Epoch: " + epoch + " - train loss: " + trainLossValue);
+            }
+
+            if(X_Test != null && Y_Test != null){
+                Matrix YHat_Test = neuralNetwork.call(X_Test);
+                double testLossValue = loss.calculateLoss(Y_Test, YHat_Test);
+                if(epoch % printInterval == 0){
+                    System.out.println("Epoch: " + epoch + " - test loss: " + testLossValue);
+                }
             }
         }
     }
