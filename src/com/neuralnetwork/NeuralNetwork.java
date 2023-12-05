@@ -19,7 +19,7 @@ import com.utilities.Matrix;
  */
 public class NeuralNetwork {
 
-    public ILayer[] layerArray = null;
+    public ILayer[] layerArray;
 
     public NeuralNetwork(ILayer... layerArray){
         this.layerArray = layerArray;
@@ -33,12 +33,11 @@ public class NeuralNetwork {
         return run;
     }
 
-    public Matrix calculateGradients(Matrix gradient){
+    public void calculateGradients(Matrix gradient){
         Matrix run = gradient;
         for(int i = this.layerArray.length - 1; i >= 0; i--){
             run = this.layerArray[i].backward(run);
         }
-        return run;
     }
 
     public static void train(NeuralNetwork neuralNetwork, Matrix X, Matrix Y, ILoss loss, IOptimizer optimizer, int epochs, int printInterval){
