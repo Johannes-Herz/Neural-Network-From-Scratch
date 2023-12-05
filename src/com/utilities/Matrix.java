@@ -174,10 +174,10 @@ public class Matrix {
     /**
      *
      * @param m1
-     * @param m2
+     * @param exponent
      * @return
      */
-    public static Matrix pow(Matrix m1, double exponent){
+    public static Matrix powerValue(Matrix m1, double exponent){
         Matrix power = new Matrix(m1.rowCount, m1.columnCount);
         for(int row = 0; row < m1.rowCount; row++){
             for(int column = 0; column < m1.columnCount; column++){
@@ -185,6 +185,32 @@ public class Matrix {
             }
         }
         return power;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param exponent
+     * @return
+     */
+    public static Matrix multiplyValue(Matrix m1, double exponent){
+        Matrix power = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                power.data[row][column] = m1.data[row][column] * exponent;
+            }
+        }
+        return power;
+    }
+
+    public static Matrix T(Matrix m1){
+        Matrix t = new Matrix(m1.columnCount, m1.rowCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                t.data[column][row] = m1.data[row][column];
+            }
+        }
+        return t;
     }
     public abstract static class EntrySupplier{
         public abstract double supply(int row, int column);
