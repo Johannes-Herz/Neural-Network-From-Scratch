@@ -211,6 +211,21 @@ public class Matrix {
     /**
      *
      * @param m1
+     * @return
+     */
+    public static Matrix sqrt(Matrix m1){
+        Matrix sqrt = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                sqrt.data[row][column] = Math.sqrt(m1.data[row][column]);
+            }
+        }
+        return sqrt;
+    }
+
+    /**
+     *
+     * @param m1
      * @param m2
      * @return
      */
@@ -234,6 +249,29 @@ public class Matrix {
     /**
      *
      * @param m1
+     * @param m2
+     * @return
+     */
+    public static Matrix divide(Matrix m1, Matrix m2){
+        if(m1.rowCount != m2.rowCount || m1.columnCount != m2.columnCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be added with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
+        }
+
+        Matrix division = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                division.data[row][column] = m1.data[row][column] / m2.data[row][column];
+            }
+        }
+        return division;
+    }
+
+    /**
+     *
+     * @param m1
      * @param exponent
      * @return
      */
@@ -250,17 +288,49 @@ public class Matrix {
     /**
      *
      * @param m1
-     * @param exponent
+     * @param value
      * @return
      */
-    public static Matrix multiplyValue(Matrix m1, double exponent){
-        Matrix power = new Matrix(m1.rowCount, m1.columnCount);
+    public static Matrix multiplyValue(Matrix m1, double value){
+        Matrix multiplication = new Matrix(m1.rowCount, m1.columnCount);
         for(int row = 0; row < m1.rowCount; row++){
             for(int column = 0; column < m1.columnCount; column++){
-                power.data[row][column] = m1.data[row][column] * exponent;
+                multiplication.data[row][column] = m1.data[row][column] * value;
             }
         }
-        return power;
+        return multiplication;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param value
+     * @return
+     */
+    public static Matrix divideValue(Matrix m1, double value){
+        Matrix division = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                division.data[row][column] = m1.data[row][column] / value;
+            }
+        }
+        return division;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param value
+     * @return
+     */
+    public static Matrix addValue(Matrix m1, double value){
+        Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                addition.data[row][column] = m1.data[row][column] + value;
+            }
+        }
+        return addition;
     }
 
     public static Matrix T(Matrix m1){
