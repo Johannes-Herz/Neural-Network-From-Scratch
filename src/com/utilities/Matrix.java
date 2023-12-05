@@ -102,6 +102,22 @@ public class Matrix {
         }
         return sum;
     }
+
+    public Matrix add(Matrix m1){
+        if(m1.rowCount != this.rowCount || m1.columnCount != this.columnCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be subtracted with " +
+                    "Dimension ("+this.rowCount+","+this.columnCount+"!\n");
+        }
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                this.data[row][column] = m1.data[row][column] + this.data[row][column];
+            }
+        }
+        return this;
+    }
+
     /**
      *
      * @param m1
@@ -190,6 +206,29 @@ public class Matrix {
             }
         }
         return subtraction;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param m2
+     * @return
+     */
+    public static Matrix add(Matrix m1, Matrix m2){
+        if(m1.rowCount != m2.rowCount || m1.columnCount != m2.columnCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be subtracted with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+        }
+
+        Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                addition.data[row][column] = m1.data[row][column] + m2.data[row][column];
+            }
+        }
+        return addition;
     }
 
     /**
