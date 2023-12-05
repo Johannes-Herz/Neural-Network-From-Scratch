@@ -34,6 +34,13 @@ public class ReLU implements ILayer {
 
     @Override
     public Matrix backward(Matrix gradient) {
-        return null;
+        Matrix dx = new Matrix(gradient.rowCount, gradient.columnCount);
+        dx.fill(new Matrix.EntrySupplier() {
+            @Override
+            public double supply(int row, int column) {
+                return gradient.data[row][column] * (input.data[column][row] > 0 ? 1 : 0);
+            }
+        });
+        return dx;
     }
 }

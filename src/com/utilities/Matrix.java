@@ -53,6 +53,14 @@ public class Matrix {
         }
     }
 
+    public Matrix fill(EntrySupplier supplier){
+        for(int row = 0; row < this.rowCount; row++){
+            for(int column = 0; column < this.columnCount; column++){
+                this.data[row][column] = supplier.supply(row, column);
+            }
+        }
+        return this;
+    }
     /**
      *
      * @param minValue
