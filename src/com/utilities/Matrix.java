@@ -80,6 +80,19 @@ public class Matrix {
      *
      * @return
      */
+    public Matrix ones(){
+        for(int row = 0; row < this.rowCount; row++){
+            for(int column = 0; column < this.columnCount; column++){
+                this.data[row][column] = 1;
+            }
+        }
+        return this;
+    }
+
+    /**
+     *
+     * @return
+     */
     public double sum(){
         double sum = 0;
         for(int row = 0; row < this.rowCount; row++){

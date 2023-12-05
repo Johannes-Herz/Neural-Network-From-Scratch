@@ -46,6 +46,17 @@ public class LinearLayer implements ILayer{
 
     @Override
     public Matrix backward(Matrix gradient) {
-        return null;
+        Matrix dw = Matrix.T(Matrix.dotProduct(this.input, gradient));
+        Matrix.multiplyValue(dw, (double) 1 / this.input.columnCount);
+        this.weight.gradient = dw;
+
+        Matrix ones = new Matrix(1, this.input.columnCount);
+        ones.ones();
+        Matrix db = Matrix.T(Matrix.dotProduct(ones, gradient));
+        Matrix.multiplyValue(db, (double) 1 / this.input.columnCount);
+        this.bias.gradient = db;
+
+        Matrix dx = Matrix.dotProduct(gradient, this.weight);
+        return dx;
     }
 }

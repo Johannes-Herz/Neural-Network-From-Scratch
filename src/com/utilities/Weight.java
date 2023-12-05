@@ -17,6 +17,7 @@ public class Weight extends Matrix {
 
     public static double MIN_RANDOM = -1;
     public static double MAX_RANDOM = 1;
+    public Matrix gradient = null;
 
     /**
      *
