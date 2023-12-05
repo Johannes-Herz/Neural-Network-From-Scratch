@@ -85,18 +85,24 @@ public class Matrix {
         }
 
         Matrix dotProduct = new Matrix(m1.rowCount, m2.columnCount);
-        for(int i = 0; i < m1.rowCount; i++){
-            for(int j = 0; j < m2.columnCount; j++){
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m2.columnCount; column++){
                 double sum = 0;
                 for(int z = 0; z < m1.columnCount; z++){
-                    sum += m1.data[i][z] * m2.data[z][j];
+                    sum += m1.data[row][z] * m2.data[z][column];
                 }
-                dotProduct.data[i][j] = sum;
+                dotProduct.data[row][column] = sum;
             }
         }
         return dotProduct;
     }
 
+    /**
+     *
+     * @param m1
+     * @param m2
+     * @return
+     */
     public static Matrix addColumn(Matrix m1, Matrix m2){
         if(m1.rowCount != m2.rowCount){
             throw new IllegalArgumentException("Dimension mismatch!\n" +
@@ -106,12 +112,35 @@ public class Matrix {
         }
 
         Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
-        for(int i = 0; i < m1.rowCount; i++){
-            for(int j = 0; j < m1.columnCount; j++){
-                addition.data[i][j] = m1.data[i][j] + m2.data[i][0];
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                addition.data[row][column] = m1.data[row][column] + m2.data[row][0];
             }
         }
         return addition;
+    }
+
+    /**
+     *
+     * @param m1
+     * @param comparator
+     * @return
+     */
+    public static Matrix forEachEntry(Matrix m1, EntryComparator comparator){
+        Matrix forEach = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                forEach.data[row][column] = comparator.compare(m1.data[row][column]);
+            }
+        }
+        return forEach;
+    }
+
+    public abstract static class EntrySupplier{
+        public abstract double supply(int row, int column);
+    }
+    public abstract static class EntryComparator{
+        public abstract double compare(double entry);
     }
 
 }
