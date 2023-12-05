@@ -68,6 +68,13 @@ public class Matrix {
         return this;
     }
 
+    /**
+     *
+     * @param m1
+     * @param m2
+     * @return
+     * @throws IllegalArgumentException If the dimensions of the given matrices m1 and m2 do not match
+     */
     public static Matrix dotProduct(Matrix m1, Matrix m2) throws IllegalArgumentException {
 
         if(m1.columnCount != m2.rowCount){
@@ -88,6 +95,23 @@ public class Matrix {
             }
         }
         return dotProduct;
+    }
+
+    public static Matrix addColumn(Matrix m1, Matrix m2){
+        if(m1.rowCount != m2.rowCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be added column-wise with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+        }
+
+        Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
+        for(int i = 0; i < m1.rowCount; i++){
+            for(int j = 0; j < m1.columnCount; j++){
+                addition.data[i][j] = m1.data[i][j] + m2.data[i][0];
+            }
+        }
+        return addition;
     }
 
 }

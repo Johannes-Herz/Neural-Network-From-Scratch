@@ -1,5 +1,6 @@
 package com.neuralnetwork.layer;
 
+import com.utilities.Bias;
 import com.utilities.Matrix;
 import com.utilities.Weight;
 
@@ -19,6 +20,7 @@ public class LinearLayer implements ILayer{
     private int inputCount = 0;
     private int outputCount = 0;
     private Weight weight = null;
+    private Bias bias = null;
     private Matrix input = null;
     private Matrix output = null;
 
@@ -31,12 +33,14 @@ public class LinearLayer implements ILayer{
         this.inputCount = inputCount;
         this.outputCount = outputCount;
         this.weight = new Weight(this.outputCount, this.inputCount);
+        this.bias = new Bias(this.outputCount, 1);
     }
 
     @Override
     public Matrix forward(Matrix input) {
         this.input = input;
         this.output = Matrix.dotProduct(this.weight, this.input);
+        this.output = Matrix.addColumn(this.output, this.bias);
         return this.output;
     }
 
