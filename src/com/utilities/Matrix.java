@@ -68,4 +68,26 @@ public class Matrix {
         return this;
     }
 
+    public static Matrix dotProduct(Matrix m1, Matrix m2) throws IllegalArgumentException {
+
+        if(m1.columnCount != m2.rowCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be multiplied with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+        }
+
+        Matrix dotProduct = new Matrix(m1.rowCount, m2.columnCount);
+        for(int i = 0; i < m1.rowCount; i++){
+            for(int j = 0; j < m2.columnCount; j++){
+                double sum = 0;
+                for(int z = 0; z < m1.columnCount; z++){
+                    sum += m1.data[i][z] * m2.data[z][j];
+                }
+                dotProduct.data[i][j] = sum;
+            }
+        }
+        return dotProduct;
+    }
+
 }
