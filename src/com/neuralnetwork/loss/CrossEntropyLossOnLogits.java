@@ -2,7 +2,7 @@ package com.neuralnetwork.loss;
 
 import com.utilities.Matrix;
 
-public class CrossEntropyOnLogits implements ILoss{
+public class CrossEntropyLossOnLogits implements ILoss{
 
     @Override
     public double calculateLoss(Matrix y, Matrix logits) {

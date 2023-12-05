@@ -1,27 +1,21 @@
-## Neural Network Implementation in Java
+import com.neuralnetwork.NeuralNetwork;
+import com.neuralnetwork.activation.ReLU;
+import com.neuralnetwork.layer.ILayer;
+import com.neuralnetwork.layer.LinearLayer;
+import com.neuralnetwork.loss.CrossEntropyLossOnLogits;
+import com.neuralnetwork.loss.MSELoss;
+import com.neuralnetwork.optimization.Adam;
+import com.neuralnetwork.optimization.GradientDescent;
+import com.utilities.DataLoader;
+import com.utilities.Matrix;
 
----
+public class Main {
 
-> This project provides a simple implementation of a neural network from scratch in Java. 
-> Following components are currently implemented: 
->  - **Linear Layer**: Implementation of a Linear Layer, y = Wx+b
->  - **ReLU**: Rectified Linear Unit activation function for introducing non-linearity.
->  - **MSELoss**: Mean Squared Error Loss for regression tasks
->  - **CrossEntropyLossOnLogits**: Cross Entropy Loss for classification tasks, based on logits
->  - **DataLoader**: Utility for loading batches of a dataset, used for training
->  - **Gradient Descent**: Basic Gradient Descent optimization
->  - **Adam**: Adaptive Moment Estimation optimizer for gradient-based optimization.
+    public static void main(String[] args) {
+        testRegression();
+        testClassification();
+    }
 
-### NeuralNetwork.class
-
----
-
-Core implementation of this project is the **NeuralNetwork** class in the package com.neuralnetwork.
-It takes instances of ILayer such as LinearLayer or ReLU Activation to construct a neural network.
-It provides a static **train** function utilizing ILoss, IOptimizer and DataLoader to train a network on a given train dataset.
-
-Following code can be used to learn a basic regression task: 
-```
     public static void testRegression(){
         Matrix X_Train = new Matrix(1, 5, new double[][]{
                 {-4, -2, 0, 2, 4}
@@ -45,6 +39,7 @@ Following code can be used to learn a basic regression task:
                 new LinearLayer(4, 1)
         });
 
+
         MSELoss mseLoss = new MSELoss();
 
         double learningRate = 0.01;
@@ -57,10 +52,6 @@ Following code can be used to learn a basic regression task:
         int printInterval = 100;
         NeuralNetwork.train(neuralNetwork, dataLoader, X_Test, Y_Test, mseLoss, adam, epochs, printInterval);
     }
-```
-
-Following code can be used to learn a basic classification task: 
-```
     public static void testClassification(){
         Matrix X_Train = new Matrix(2, 4, new double[][]{
                 {0, 1, 0, 1},
@@ -97,4 +88,4 @@ Following code can be used to learn a basic classification task:
         int printInterval = 100;
         NeuralNetwork.train(neuralNetwork, dataLoader, X_Test, Y_Test, crossEntropyLossOnLogits, gradientDescent, epochs, printInterval);
     }
-```
+}
