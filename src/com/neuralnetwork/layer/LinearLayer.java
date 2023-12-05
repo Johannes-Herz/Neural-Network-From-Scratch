@@ -19,6 +19,8 @@ public class LinearLayer implements ILayer{
     private int inputCount = 0;
     private int outputCount = 0;
     private Weight weight = null;
+    private Matrix input = null;
+    private Matrix output = null;
 
     /**
      *
@@ -33,7 +35,9 @@ public class LinearLayer implements ILayer{
 
     @Override
     public Matrix forward(Matrix input) {
-        return null;
+        this.input = input;
+        this.output = Matrix.dotProduct(this.weight, this.input);
+        return this.output;
     }
 
     @Override
