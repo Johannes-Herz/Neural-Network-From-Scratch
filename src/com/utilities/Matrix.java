@@ -172,6 +172,46 @@ public class Matrix {
     /**
      *
      * @param m1
+     * @param m2
+     * @return
+     */
+    public static Matrix divideRow(Matrix m1, Matrix m2){
+        if(m1.columnCount != m2.columnCount){
+            throw new IllegalArgumentException("Dimension mismatch!\n" +
+                    "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
+                    "cannot be divided row-wise with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
+        }
+
+        Matrix division = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                division.data[row][column] = m1.data[row][column] / m2.data[0][column];
+            }
+        }
+        return division;
+    }
+
+    /**
+     *
+     * @param m1
+     * @return
+     */
+    public static Matrix sumColumn(Matrix m1){
+        Matrix sums = new Matrix(1, m1.columnCount);
+        for(int column = 0; column < m1.columnCount; column++){
+            double sum = 0;
+            for(int row = 0; row < m1.rowCount; row++){
+                sum += m1.data[row][column];
+            }
+            sums.data[0][column] = sum;
+        }
+        return sums;
+    }
+
+    /**
+     *
+     * @param m1
      * @param comparator
      * @return
      */
@@ -221,6 +261,21 @@ public class Matrix {
             }
         }
         return sqrt;
+    }
+
+    /**
+     *
+     * @param m1
+     * @return
+     */
+    public static Matrix exp(Matrix m1){
+        Matrix exp = new Matrix(m1.rowCount, m1.columnCount);
+        for(int row = 0; row < m1.rowCount; row++){
+            for(int column = 0; column < m1.columnCount; column++){
+                exp.data[row][column] = Math.exp(m1.data[row][column]);
+            }
+        }
+        return exp;
     }
 
     /**
