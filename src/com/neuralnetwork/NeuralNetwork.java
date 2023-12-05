@@ -1,6 +1,8 @@
 package com.neuralnetwork;
 
 import com.neuralnetwork.layer.ILayer;
+import com.neuralnetwork.loss.ILoss;
+import com.neuralnetwork.optimization.IOptimizer;
 import com.utilities.Matrix;
 
 /**
@@ -38,4 +40,21 @@ public class NeuralNetwork {
         }
         return run;
     }
+
+    public static void train(NeuralNetwork neuralNetwork, Matrix X, Matrix Y, ILoss loss, IOptimizer optimizer, int epochs, int printInterval){
+
+        for(int epoch = 0; epoch < epochs; epoch++){
+
+            Matrix YHat = neuralNetwork.call(X);
+            double lossValue = loss.calculateLoss(Y, YHat);
+            neuralNetwork.calculateGradients(loss.calculateGradient(Y, YHat));
+            optimizer.step();
+
+
+            if(epoch % printInterval == 0){
+                System.out.println("Epoch: " + epoch + " - current loss: " + lossValue);
+            }
+        }
+    }
+
 }

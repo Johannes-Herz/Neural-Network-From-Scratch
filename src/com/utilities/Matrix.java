@@ -107,8 +107,8 @@ public class Matrix {
         if(m1.rowCount != this.rowCount || m1.columnCount != this.columnCount){
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
-                    "cannot be subtracted with " +
-                    "Dimension ("+this.rowCount+","+this.columnCount+"!\n");
+                    "cannot be added with " +
+                    "Dimension ("+this.rowCount+","+this.columnCount+")!\n");
         }
         for(int row = 0; row < m1.rowCount; row++){
             for(int column = 0; column < m1.columnCount; column++){
@@ -130,7 +130,7 @@ public class Matrix {
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
                     "cannot be multiplied with " +
-                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
         }
 
         Matrix dotProduct = new Matrix(m1.rowCount, m2.columnCount);
@@ -157,7 +157,7 @@ public class Matrix {
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
                     "cannot be added column-wise with " +
-                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
         }
 
         Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
@@ -196,7 +196,7 @@ public class Matrix {
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
                     "cannot be subtracted with " +
-                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
         }
 
         Matrix subtraction = new Matrix(m1.rowCount, m1.columnCount);
@@ -218,8 +218,8 @@ public class Matrix {
         if(m1.rowCount != m2.rowCount || m1.columnCount != m2.columnCount){
             throw new IllegalArgumentException("Dimension mismatch!\n" +
                     "Dimension ("+m1.rowCount + ","+m1.columnCount+") " +
-                    "cannot be subtracted with " +
-                    "Dimension ("+m2.rowCount+","+m2.columnCount+"!\n");
+                    "cannot be added with " +
+                    "Dimension ("+m2.rowCount+","+m2.columnCount+")!\n");
         }
 
         Matrix addition = new Matrix(m1.rowCount, m1.columnCount);
