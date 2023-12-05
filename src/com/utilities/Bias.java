@@ -1,5 +1,18 @@
 package com.utilities;
 
+/**
+ *
+ * <pre>
+ * {@code
+ * Bias a = new Bias(1, 2);
+ * Bias b = new Bias(2, 2, new double[][]{{1, 2}, {3, 4}});
+ * }
+ * </pre>
+ *
+ * @author jherz
+ * @version 1.0.1
+ * @since 05.12.2023
+ */
 public class Bias extends Matrix {
 
     public static double MIN_RANDOM = -1;
