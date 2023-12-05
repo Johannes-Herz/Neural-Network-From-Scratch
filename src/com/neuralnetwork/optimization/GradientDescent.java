@@ -7,8 +7,8 @@ import com.utilities.Matrix;
 
 public class GradientDescent implements IOptimizer{
 
-    public NeuralNetwork neuralNetwork = null;
-    public double learningRate = 0;
+    public NeuralNetwork neuralNetwork;
+    public double learningRate;
     public GradientDescent(NeuralNetwork neuralNetwork, double learningRate){
         this.neuralNetwork = neuralNetwork;
         this.learningRate = learningRate;

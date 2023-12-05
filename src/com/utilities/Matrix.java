@@ -17,9 +17,9 @@ import java.util.Random;
  */
 public class Matrix {
 
-    public double[][] data = null;
-    public int rowCount = 0;
-    public int columnCount = 0;
+    public double[][] data;
+    public int rowCount;
+    public int columnCount;
 
     /**
      *

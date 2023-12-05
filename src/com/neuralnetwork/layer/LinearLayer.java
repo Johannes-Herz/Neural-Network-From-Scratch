@@ -17,10 +17,10 @@ import com.utilities.Weight;
  * @since 05.12.2023
  */
 public class LinearLayer implements ILayer{
-    public int inputCount = 0;
-    public int outputCount = 0;
-    public Weight weight = null;
-    public Bias bias = null;
+    public int inputCount;
+    public int outputCount;
+    public Weight weight;
+    public Bias bias;
     public Matrix input = null;
     public Matrix output = null;
 
