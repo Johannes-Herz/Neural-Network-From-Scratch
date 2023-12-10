@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="neural_network_from_scratch:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/neural_network_from_scratch_jar</output-path>
+    <root id="archive" name="neural_network_from_scratch.jar">
+      <element id="module-output" name="neural_network_from_scratch" />
+    </root>
+  </artifact>
+</component>

@@ -1,13 +1,13 @@
-import com.neuralnetwork.NeuralNetwork;
-import com.neuralnetwork.activation.ReLU;
-import com.neuralnetwork.layer.ILayer;
-import com.neuralnetwork.layer.LinearLayer;
-import com.neuralnetwork.loss.CrossEntropyLossOnLogits;
-import com.neuralnetwork.loss.MSELoss;
-import com.neuralnetwork.optimization.Adam;
-import com.neuralnetwork.optimization.GradientDescent;
-import com.utilities.DataLoader;
-import com.utilities.Matrix;
+import nnfs.neuralnetwork.NeuralNetwork;
+import nnfs.neuralnetwork.activation.ReLU;
+import nnfs.neuralnetwork.layer.ILayer;
+import nnfs.neuralnetwork.layer.LinearLayer;
+import nnfs.neuralnetwork.loss.CrossEntropyLossOnLogits;
+import nnfs.neuralnetwork.loss.MSELoss;
+import nnfs.neuralnetwork.optimization.Adam;
+import nnfs.neuralnetwork.optimization.GradientDescent;
+import nnfs.utilities.DataLoader;
+import nnfs.utilities.Matrix;
 
 public class Main {
 
