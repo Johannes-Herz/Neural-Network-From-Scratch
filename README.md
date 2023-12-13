@@ -16,7 +16,7 @@
 
 ---
 
-Core implementation of this project is the **NeuralNetwork** class in the package com.neuralnetwork.
+Core implementation of this project is the **NeuralNetwork** class in the package nnfs.neuralnetwork.
 It takes instances of ILayer such as LinearLayer or ReLU Activation to construct a neural network.
 It provides a static **train** function utilizing ILoss, IOptimizer and DataLoader to train a network on a given train dataset.
 
